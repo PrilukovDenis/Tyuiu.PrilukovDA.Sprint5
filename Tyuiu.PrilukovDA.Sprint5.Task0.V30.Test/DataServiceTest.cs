@@ -8,9 +8,10 @@ namespace Tyuiu.PrilukovDA.Sprint5.Task0.V30.Test
         [TestMethod]
         public void TestMethod1()
         {
-            string path = "C:\\Users\\prilu\\source\\repos\\Tyuiu.PrilukovDA.Sprint5\\Tyuiu.PrilukovDA.Sprint5.Task0.V30\\bin\\Debug\\net8.0\\OutPutFileTask0.txt";
-            FileInfo fileInfo = new FileInfo(path);
+            DataService ds = new DataService();
+            string path = ds.SaveToFileTextData(3);
 
+            FileInfo fileInfo = new FileInfo(path);
             Assert.AreEqual(true, fileInfo.Exists);
         }
     }
