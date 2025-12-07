@@ -11,7 +11,7 @@ namespace Tyuiu.PrilukovDA.Sprint5.Task0.V30.Lib
 
             double denominator = 3 * x + 4;
             double y = denominator != 0 ? (x * x + 1) / denominator : 0;
-            y = Math.Round(y, 2);
+            y = Math.Round(y, 3);
 
             File.WriteAllText(path, y.ToString());
             return path;
