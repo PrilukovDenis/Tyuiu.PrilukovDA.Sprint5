@@ -12,7 +12,11 @@ namespace Tyuiu.PrilukovDA.Sprint5.Task3.V24.Lib
             double y = 6.1 * Math.Pow(x, 3) + 0.23 * Math.Pow(x, 2) + 1.04 * x;
             y = Math.Round(y, 3);
 
-            File.WriteAllText(path, y.ToString());
+            using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.OpenOrCreate), Encoding.UTF8))
+            {
+                writer.Write(BitConverter.GetBytes(y));
+            }
+
             return path;
         }
     }
