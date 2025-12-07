@@ -19,7 +19,7 @@ Console.WriteLine("* ИСХОДНЫЕ ДАННЫЕ:                             
 Console.WriteLine("***************************************************************************");
 
 
-string path = $@"{Directory.GetCurrentDirectory()}\InPutDataFileTask7V14.txt";
+string path = $@"{Directory.GetCurrentDirectory()}\DataSprint5\InPutDataFileTask7V14.txt";
 
 
 string result = ds.LoadDataAndSave(path);
