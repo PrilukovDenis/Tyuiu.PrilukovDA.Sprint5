@@ -21,7 +21,6 @@ Console.WriteLine("*************************************************************
 
 string path = $@"{Directory.GetCurrentDirectory()}\DataSprint5\InPutDataFileTask7V14.txt";
 
-
 string result = ds.LoadDataAndSave(path);
 
 Console.WriteLine("***************************************************************************");

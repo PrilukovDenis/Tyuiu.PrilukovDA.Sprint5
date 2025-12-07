@@ -7,7 +7,8 @@ namespace Tyuiu.PrilukovDA.Sprint5.Task7.V14.Lib
     {
         public string LoadDataAndSave(string path)
         {
-            string pathSaveFile = $@"{Directory.GetCurrentDirectory()}\DataSprint5\OutPutDataFileTask7V14.txt";
+            string pathSaveFile = Path.Combine(Path.GetTempPath(), "OutPutDataFileTask7V14.txt");
+
 
             FileInfo fileInfo = new FileInfo(path);
             bool fileExst = fileInfo.Exists;
