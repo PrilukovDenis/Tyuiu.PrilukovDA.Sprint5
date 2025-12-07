@@ -1,4 +1,5 @@
-﻿using tyuiu.cources.programming.interfaces.Sprint5;
+﻿using System.Globalization;
+using tyuiu.cources.programming.interfaces.Sprint5;
 
 namespace Tyuiu.PrilukovDA.Sprint5.Task5.V29.Lib
 {
@@ -7,27 +8,32 @@ namespace Tyuiu.PrilukovDA.Sprint5.Task5.V29.Lib
         public double LoadFromDataFile(string path)
         {
             string[] lines = File.ReadAllLines(path);
-            int minTwoDigit = int.MaxValue;
+            double minTwoDigit = double.MaxValue;
+            bool found = false;
 
             foreach (string line in lines)
             {
                 string trimmed = line.Trim();
                 if (string.IsNullOrEmpty(trimmed)) continue;
 
-                if (int.TryParse(trimmed, out int num))
+                if (double.TryParse(trimmed.Replace('.', ','), NumberStyles.Any, CultureInfo.InvariantCulture, out double num))
                 {
-                    if ((num >= 10 && num <= 99) || (num <= -10 && num >= -99))
+                    if (Math.Abs(num % 1) < 1e-12)
                     {
-                        if (num < minTwoDigit)
+                        int intNum = (int)num;
+                        if ((intNum >= 10 && intNum <= 99) || (intNum <= -10 && intNum >= -99))
                         {
-                            minTwoDigit = num;
+                            if (intNum < minTwoDigit)
+                            {
+                                minTwoDigit = intNum;
+                                found = true;
+                            }
                         }
                     }
                 }
-
             }
 
-            if (minTwoDigit == int.MaxValue)
+            if (!found)
             {
                 return 0;
             }
