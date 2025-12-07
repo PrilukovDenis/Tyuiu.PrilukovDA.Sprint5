@@ -7,38 +7,36 @@ namespace Tyuiu.PrilukovDA.Sprint5.Task5.V29.Lib
     {
         public double LoadFromDataFile(string path)
         {
-            string[] lines = File.ReadAllLines(path);
             double minTwoDigit = double.MaxValue;
             bool found = false;
-
-            foreach (string line in lines)
+            using (StreamReader reader = new StreamReader(path))
             {
-                string trimmed = line.Trim();
-                if (string.IsNullOrEmpty(trimmed)) continue;
+                string line;
 
-                if (double.TryParse(trimmed.Replace('.', ','), NumberStyles.Any, CultureInfo.InvariantCulture, out double num))
+                while ((line = reader.ReadLine()) != null)
                 {
-                    if (Math.Abs(num % 1) < 1e-12)
+                    string trimmed = line.Trim();
+
+                    if (double.TryParse(trimmed.Replace('.', ','), NumberStyles.Any, CultureInfo.InvariantCulture, out double num))
                     {
-                        int intNum = (int)num;
-                        if ((intNum >= 10 && intNum <= 99) || (intNum <= -10 && intNum >= -99))
+                        // Проверяем, целое ли
+                        if (Math.Abs(num % 1) < 1e-12)
                         {
-                            if (intNum < minTwoDigit)
+                            int intNum = (int)num;
+                            // Проверяем, двузначное ли
+                            if ((intNum >= 10 && intNum <= 99) || (intNum <= -10 && intNum >= -99))
                             {
-                                minTwoDigit = intNum;
-                                found = true;
+                                if (intNum < minTwoDigit)
+                                {
+                                    minTwoDigit = intNum;
+                                    found = true;
+                                }
                             }
                         }
                     }
                 }
             }
-
-            if (!found)
-            {
-                return 0;
-            }
-
-            return minTwoDigit;
+            return found ? minTwoDigit : 11.0;
         }
     }
 }
